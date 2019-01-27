@@ -8,9 +8,9 @@ var prefix = conf.prefix;
 client.login(conf.token);
 
 client.on('ready', () => {
-    client.user.setActivity('Modérationné', {type : "PLAYING"});
-    //client.user.setAvatar('');
-    console.log('[LSDs] Ready to go !');
+	client.user.setActivity('Modérationner', {type : "PLAYING"});
+    	client.user.setAvatar('https://orig00.deviantart.net/5e74/f/2011/057/b/6/blue_robot_girl_by_tehstreet-d3ahkb4.jpg');
+    	console.log('[LSDs] Ready to go !');
 });
 
 client.on('message', message => {
@@ -19,14 +19,15 @@ client.on('message', message => {
     if (message.channel.type === 'dm') return;
 
 
-    //IMPORT DES COMMANDES
+    //IMPORT OF COMMANDS
         var help = require('./commands/help.js');
         var streamers = require('./commands/streamers.js');
+        var joke = require('./commands/joke.js');
+        var mod = require('./commands/mod.js')
 
-    //COMMANDES APP
+    //COMMANDS APP
         help.help(prefix, message, Discord);
         streamers.streamers(prefix, message, Discord, client);
-
-
-
+        joke.joke(prefix, message, Discord);
+        mod.mod(prefix, message, Discord, client)
 });
