@@ -1,4 +1,4 @@
-# Bot discord Officel du serveur discord "La secte des streamers"
+# Bot discord Officiel du serveur discord "La secte des streamers"
 
 ---
 
