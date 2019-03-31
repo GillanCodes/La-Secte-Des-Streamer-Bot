@@ -67,6 +67,33 @@ module.exports = {
             }
         }
 
+        if(message.content.startsWith(prefix + "clear")) {
+            let myrole = message.guild.member(client.user).hasPermission("MANAGE_MESSAGES");
+            let yourole = message.guild.member(message.author).hasPermission("MANAGE_MESSAGES");
+    
+            if (!myrole) {
+                return message.channel.send(":no_entry: **Je n'ai pas les permissions nécessaires**");
+            }
+    
+            if (!yourole) {
+                return message.channel.send(":no_entry: **Vous n'avez pas les permissions nécessaires**");
+            }
+    
+            var suppression = message.content.substr(6);
+            if (suppression < 2 || suppression > 101) {
+                return message.reply("**La valeur que vous avez entré est invalide, merci de choisir une valeur comprise entre 2 et 100**");
+            }
+            message.channel.bulkDelete(suppression, true).then(ok => {
+                const embed = new Discord.RichEmbed()
+                        .addField(":white_check_mark: Les messages ont été supprimés !", "Au total = **"+suppression+"**")
+                        .addField("Par :" , message.author)
+                
+                message.channel.send({embed})
+                .then(message => setTimeout(function(){message.delete}, 5000))
+                .catch(err => console.log(err));
+            })
+        }
+
 
 
 
